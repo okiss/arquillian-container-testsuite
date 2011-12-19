@@ -4,9 +4,79 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>arquillian-container-testsuite</groupId>
+    <groupId>org.arquillian.container.testsuite</groupId>
     <artifactId>arquillian-container-testsuite</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-6.0</artifactId>
+                <version>3.0.0.Beta1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     
+    <dependencies>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <version>1.0.0.CR6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.protocol</groupId>
+            <artifactId>arquillian-protocol-servlet</artifactId>
+            <version>1.0.0.CR6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.core</groupId>
+            <artifactId>arquillian-core-impl-base</artifactId>
+            <version>1.0.0.CR6</version>
+        </dependency>
+    </dependencies>
+
+    <modules>
+        <module>package-cdi-war</module>
+        <module>package-ejb-war</module>
+        <module>package-cdi-ear</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>eap-managed</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-managed</artifactId>
+                    <version>7.1.0.Beta1</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <modules>
+                <module>test-arquillianresource</module>
+                <module>test-cdi</module>
+                <module>test-ejb</module>
+                <module>test-resource</module>
+            </modules>
+        </profile>
+    </profiles>
+
+
+
 </project>
