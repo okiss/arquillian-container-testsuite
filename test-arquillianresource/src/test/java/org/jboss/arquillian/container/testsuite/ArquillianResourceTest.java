@@ -1,6 +1,7 @@
 package org.jboss.arquillian.container.testsuite;
 
 import junit.framework.Assert;
+import org.jboss.arquillian.container.test.api.Deployer;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -30,7 +31,18 @@ public class ArquillianResourceTest {
 
     @Test
     @RunAsClient
-    public void cdiTest(@ArquillianResource URL url) {
+    public void urlTest(@ArquillianResource URL url) {
         Assert.assertNotNull(url);
+    }
+
+    @Test
+    public void deployerTest(@ArquillianResource Deployer deployer) {
+        Assert.assertNotNull(deployer);
+    }
+
+    @Test
+    @RunAsClient
+    public void clientDeployerTest(@ArquillianResource Deployer deployer) {
+        Assert.assertNotNull(deployer);
     }
 }
