@@ -4,7 +4,7 @@
 
    <groupId>org.jboss.arquillian.container.testsuite</groupId>
    <artifactId>package-cdi-ear</artifactId>
-   <version>7.0.2-SNAPSHOT</version>
+   <version>1.0.0-alpha-1-SNAPSHOT</version>
    <name>CDI EAR</name>
 
    <url>http://jboss.org/jbossas</url>

@@ -9,10 +9,11 @@
         <version>8</version>
     </parent>
 
-    <groupId>org.arquillian.container.testsuite</groupId>
+    <groupId>org.jboss.arquillian.container.testsuite</groupId>
     <artifactId>arquillian-container-testsuite</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-alpha-1-SNAPSHOT</version>
+    <name>Arquillian Container Testsuite Aggregator</name>
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following
@@ -67,35 +68,16 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.10</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <!-- Test dependencies -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.protocol</groupId>
-            <artifactId>arquillian-protocol-servlet</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.core</groupId>
-            <artifactId>arquillian-core-impl-base</artifactId>
-        </dependency>
-    </dependencies>
 
     <modules>
         <module>package-cdi-war</module>
@@ -107,10 +89,6 @@
         <module>test-ejb</module>
         <module>test-resource</module>
     </modules>
-
-    <build>
-
-    </build>
 
     <profiles>
         <profile>
@@ -140,8 +118,12 @@
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                    <version>7.1.0.Beta1b</version>
+                    <version>7.1.0.CR1b</version>
                     <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.arquillian.protocol</groupId>
+                    <artifactId>arquillian-protocol-servlet</artifactId>                                                                                                                                  <scope>test</scope> 
                 </dependency>
             </dependencies>
         </profile>

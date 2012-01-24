@@ -4,21 +4,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.arquillian.container.testsuite</groupId>
+        <groupId>org.jboss.arquillian.container.testsuite</groupId>
         <artifactId>arquillian-container-testsuite</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-alpha-1-SNAPSHOT</version>
     </parent>
 
     <artifactId>test-resource</artifactId>
     <packaging>jar</packaging>
-    <name>Arquillian Container Testsuite: @EJB</name>
+    <name>Arquillian Container Testsuite: @Resource tests</name>
 
     <dependencies>
         <dependency>
             <groupId>org.jboss.arquillian.container.testsuite</groupId>
             <artifactId>package-cdi-war</artifactId>
-            <version>7.0.2-SNAPSHOT</version>
+            <version>${project.version}</version>
             <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
