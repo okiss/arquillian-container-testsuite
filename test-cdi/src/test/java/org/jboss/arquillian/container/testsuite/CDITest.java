@@ -26,8 +26,8 @@ public class CDITest {
     }
 
     @Test
-    public void cdiTest() {
-        Assert.assertNotNull(service);
+    public void cdiTest(String name) {
+        Assert.assertNotNull("Service not null", service);
         Assert.assertEquals("Hello World!", service.createHelloMessage("World"));
     }
 }
