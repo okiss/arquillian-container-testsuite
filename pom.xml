@@ -73,7 +73,7 @@
         </profile>
 
         <profile>
-            <id>eap-managed</id>
+            <id>jboss-as7-managed</id>
 
             <properties>
                 <!-- Specify the JBoss AS directory to be the JBOSS_HOME environment variable -->
