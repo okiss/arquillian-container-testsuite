@@ -1,79 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.arquillian.container.testsuite</groupId>
+    <parent>
+        <groupId>org.jboss</groupId>
+        <artifactId>jboss-parent</artifactId>
+        <version>8</version>
+    </parent>
+
+    <groupId>org.jboss.arquillian.container.testsuite</groupId>
     <artifactId>arquillian-container-testsuite</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.0.0-alpha-1-SNAPSHOT</version>
+    <name>Arquillian Container Testsuite: Aggregator</name>
+
+    <modules>
+        <module>build</module>
+        <module>package-cdi-war</module>
+        <module>package-ejb-war</module>
+        <module>package-cdi-ear</module>
+
+        <module>test-arquillianresource</module>
+        <module>test-cdi</module>
+        <module>test-ejb</module>
+        <module>test-resource</module>
+    </modules>
+
+    <properties>
+        <!-- Explicitly declaring the source encoding eliminates the following message: -->
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Timestamp format for the maven.build.timestamp property -->
+        <!-- You can reference property in pom.xml or filtered resources (must enable third-party plugin if using Maven < 2.1) -->
+        <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- JBoss distributes a complete set of Java EE 6 APIs including a Bill of Materials (BOM). A BOM specifies the versions 
+                of a "stack" (or a collection) of artifacts. We use this here so that we always get the correct versions of artifacts. Here we use 
+                the jboss-javaee-6.0-with tools stack (you can read this as the JBoss stack of the Java EE 6 APIs, with some extras tools for your 
+                project, such as Arquillian for testing) -->
             <dependency>
-                <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-6.0</artifactId>
-                <version>3.0.0.Beta1</version>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+                <version>1.0.0.M1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
-    <dependencies>
-        <!-- Test dependencies -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <version>1.0.0.CR6</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.protocol</groupId>
-            <artifactId>arquillian-protocol-servlet</artifactId>
-            <version>1.0.0.CR6</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.core</groupId>
-            <artifactId>arquillian-core-impl-base</artifactId>
-            <version>1.0.0.CR6</version>
-        </dependency>
-    </dependencies>
-
-    <modules>
-        <module>package-cdi-war</module>
-        <module>package-ejb-war</module>
-        <module>package-cdi-ear</module>
-    </modules>
 
     <profiles>
         <profile>
-            <id>eap-managed</id>
+            <!-- The default profile skips all tests, though you can tune it to run just unit tests based on a custom pattern -->
+            <!-- Seperate profiles are provided for running all tests, including Arquillian tests that execute in the specified container -->
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>jboss-as7-managed</id>
+
+            <properties>
+                <!-- Specify the JBoss AS directory to be the JBOSS_HOME environment variable -->
+                <jboss.home>${env.JBOSS_HOME}</jboss.home>
+            </properties>
+
             <dependencies>
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                    <version>7.1.0.Beta1</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.arquillian.protocol</groupId>
+                    <artifactId>arquillian-protocol-servlet</artifactId>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
-            <modules>
-                <module>test-arquillianresource</module>
-                <module>test-cdi</module>
-                <module>test-ejb</module>
-                <module>test-resource</module>
-            </modules>
         </profile>
     </profiles>
 
