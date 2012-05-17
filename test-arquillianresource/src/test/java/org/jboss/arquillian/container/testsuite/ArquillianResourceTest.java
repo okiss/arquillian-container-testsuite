@@ -24,7 +24,7 @@ import java.net.URL;
 @RunWith(Arquillian.class)
 public class ArquillianResourceTest {
 
-    @Deployment
+    @Deployment()
     public static WebArchive createDeployment() {
         return ShrinkWrap.createFromZipFile(WebArchive.class, new File("../package-cdi-war/target/test.war"));
     }

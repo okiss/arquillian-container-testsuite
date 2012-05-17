@@ -14,7 +14,9 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import sun.tools.jar.resources.jar;
 
+import java.io.File;
 import java.net.URL;
 
 @RunWith(Arquillian.class)
@@ -26,14 +28,7 @@ public class EARDeploymentTest {
 
     @Deployment
     public static EnterpriseArchive createDeployment() {
-        JavaArchive jar = ShrinkWrap.create(JavaArchive.class, "test.jar")
-                .addClass(HelloService.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-
-        WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
-                .addClass(HelloWorldServlet.class);
-
-        return ShrinkWrap.create(EnterpriseArchive.class, "test.ear").addAsModule(jar).addAsModule(war);
+        return ShrinkWrap.createFromZipFile(EnterpriseArchive.class, new File("../package-cdi-ear/ear/target/test.ear"));
     }
 
     @Test

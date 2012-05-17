@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.arquillian.container.testsuite</groupId>
+    <groupId>org.jboss.arquillian.container.testsuite</groupId>
     <artifactId>arquillian-container-testsuite</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
@@ -60,11 +60,14 @@
     <profiles>
         <profile>
             <id>eap-managed</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                    <version>7.1.0.Beta1</version>
+                    <version>7.1.0.Final</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -72,7 +75,104 @@
                 <module>test-arquillianresource</module>
                 <module>test-cdi</module>
                 <module>test-ejb</module>
-                <module>test-resource</module>
+                <!--<module>test-resource</module>-->
+                <module>test-ear</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>eap-remote</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                    <version>7.1.0.Final</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <modules>
+                <module>test-arquillianresource</module>
+                <module>test-cdi</module>
+                <module>test-ejb</module>
+                <!--<module>test-resource</module>-->
+                <module>test-ear</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ews-t6-managed</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-tomcat-managed-6</artifactId>
+                    <version>1.0.0.CR2</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>catalina</artifactId>
+                    <version>6.0.32</version>
+                </dependency>
+            </dependencies>
+            <modules>
+                <module>test-arquillianresource</module>
+                <module>test-cdi</module>
+                <module>test-ejb</module>
+                <!--<module>test-resource</module>-->
+                <module>test-ear</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ews-t6-remote</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-tomcat-remote-6</artifactId>
+                    <version>1.0.0.CR2</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>catalina</artifactId>
+                    <version>6.0.32</version>
+                </dependency>
+            </dependencies>
+            <modules>
+                <module>test-arquillianresource</module>
+                <module>test-cdi</module>
+                <module>test-ejb</module>
+                <!--<module>test-resource</module>-->
+                <module>test-ear</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ews-t5-managed</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-tomcat-managed-5.5</artifactId>
+                    <version>1.0.0.CR2</version>
+                </dependency>
+                <dependency>
+                    <groupId>tomcat</groupId>
+                    <artifactId>catalina</artifactId>
+                    <version>5.5.23</version>
+                </dependency>
+            </dependencies>
+            <modules>
+                <module>test-arquillianresource</module>
+                <module>test-cdi</module>
+                <module>test-ejb</module>
+                <!--<module>test-resource</module>-->
+                <module>test-ear</module>
             </modules>
         </profile>
     </profiles>
