@@ -6,7 +6,7 @@
     <groupId>org.jboss.arquillian.container.testsuite</groupId>
     <artifactId>test-ear</artifactId>
     <version>7.0.2-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>EAR deployment test</name>
 
     <parent>
@@ -22,9 +22,16 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.arquillian.container.testsuite</groupId>
-            <artifactId>package-cdi-ear</artifactId>
+            <artifactId>package-cdi-ear-ejb</artifactId>
             <version>7.0.2-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.container.testsuite</groupId>
+            <artifactId>package-cdi-ear-web</artifactId>
+            <version>7.0.2-SNAPSHOT</version>
+            <scope>provided</scope>
+            <classifier>classes</classifier>
         </dependency>
     </dependencies>
 

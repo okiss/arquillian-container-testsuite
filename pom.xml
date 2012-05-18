@@ -20,7 +20,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <dependencies>
         <!-- Test dependencies -->
         <dependency>
@@ -33,21 +33,21 @@
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>1.0.0.CR6</version>
+            <version>1.0.0.CR7</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
-            <version>1.0.0.CR6</version>
+            <version>1.0.0.CR7</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.core</groupId>
             <artifactId>arquillian-core-impl-base</artifactId>
-            <version>1.0.0.CR6</version>
+            <version>1.0.0.CR7</version>
         </dependency>
     </dependencies>
 
@@ -75,7 +75,7 @@
                 <module>test-arquillianresource</module>
                 <module>test-cdi</module>
                 <module>test-ejb</module>
-                <!--<module>test-resource</module>-->
+                <module>test-resource</module>
                 <module>test-ear</module>
             </modules>
         </profile>
@@ -176,7 +176,6 @@
             </modules>
         </profile>
     </profiles>
-
 
 
 </project>

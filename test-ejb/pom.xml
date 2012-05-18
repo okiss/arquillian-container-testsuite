@@ -6,7 +6,7 @@
     <groupId>org.jboss.arquillian.container.testsuite</groupId>
     <artifactId>test-ejb</artifactId>
     <version>7.0.2-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>EJB test</name>
 
     <parent>
@@ -25,6 +25,7 @@
             <artifactId>package-ejb-war</artifactId>
             <version>7.0.2-SNAPSHOT</version>
             <scope>provided</scope>
+            <classifier>classes</classifier>
         </dependency>
     </dependencies>
 
